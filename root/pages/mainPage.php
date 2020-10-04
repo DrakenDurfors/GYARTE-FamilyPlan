@@ -1,3 +1,13 @@
+
+
+<?php
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +17,10 @@
     <title>Document</title>
 </head>
 <body>
-    hello
+    <form action="login.php" method="post">
+    <input type="text" name="uname" placeholder="Username..." id="uname">
+    <input type="password" name="pword" placeholder="Password..." id="pword" >
+    <button type="submit" name="submitBtn">Submit</button>
+    </form>
 </body>
 </html>
