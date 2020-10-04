@@ -1,0 +1,86 @@
+:root{
+    --myColor1: #1AC8ED;
+    --myColor2: #161925;
+    --myColor3: #23395B;
+    --myColor4: #FFFAFB;
+    --myColor5: #8DE969;
+}
+
+body{
+    margin: 0 auto;
+}
+*{
+    box-sizing: border-box;
+    color:var(--myColor2);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* ------------ Navbar ------------ */
+.navbar{
+    display:grid;
+    grid-template-columns: repeat(2, auto);
+    background-color: var(--myColor3);
+}
+
+.navlist{
+    list-style: none;
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+
+.navListItem{
+    float:left;
+}
+
+.navListItem > a{
+    display:block;
+    padding: 2rem;
+    color:var(--myColor4);
+    text-decoration: none;
+    transition:0.5s;
+}
+.navListItem > a:hover{
+    background-color:var(--myColor1);
+    color:var(--myColor2);
+}
+/* ----- */
+.loginReg{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    overflow:hidden;
+    padding-right: 2em;
+}
+.loginForm{
+
+    margin:0;
+    padding:0.5rem;
+}
+.loginInputField{
+    height: 2rem;
+}
+
+.loginBtn{
+    height:2rem;
+    border-color: var(--myColor2);
+    background-color: var(--myColor4);
+    user-select: none;
+    cursor: pointer;
+
+}
+
+.regButt{
+    display:flex;
+    height: 2rem;
+    background-color: var(--myColor4);
+    user-select: none;
+    text-align: center;
+    align-items: center;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--myColor2);
+    text-decoration:none;
+
+}
