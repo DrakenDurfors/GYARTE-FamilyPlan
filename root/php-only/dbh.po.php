@@ -1,5 +1,5 @@
 <?php
-
+// This codes only purpuse is to connect and make sure it does connect to the database
 $servername = "localhost";
 $dBUsername = "root";
 $dBPassword = "";
