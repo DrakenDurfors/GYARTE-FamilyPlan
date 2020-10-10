@@ -1,12 +1,11 @@
-
 <?php
-    require "../includes/navbar.php";
+require "../includes/navbar.php";
 ?>
 
-    <!-- vast emptyness -->
-    
-    
+<!-- vast emptyness -->
 
-<?php 
-    require "../includes/footer.php"
+
+
+<?php
+require "../includes/footer.php"
 ?>

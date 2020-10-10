@@ -7,6 +7,6 @@ $dBName = "gyarte";
 
 $conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
 
-if(!$conn){
-    die("Connection unsuccesfull: " .mysqli_connect_error());
+if (!$conn) {
+    die("Connection unsuccesfull: " . mysqli_connect_error());
 }
