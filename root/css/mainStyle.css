@@ -99,3 +99,15 @@ a:hover{
     color:var(--myColor2);
 
 }
+
+/* ------------ User screen ------------ */
+
+.profile-select{
+    height: 8rem;
+    width: 8rem;
+    border: 2px solid black;
+    border-radius:100%;
+    text-align:center;
+    background-color:var(--myColor4);
+    margin:1rem;
+}
