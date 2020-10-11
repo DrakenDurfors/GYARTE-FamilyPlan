@@ -4,23 +4,15 @@ require "../includes/navbar.php";
 if (!isset($_SESSION['userID'])) {
     header("Location: ../pages/index.php");
     exit();
-
-    
 }
-
-function runMyFunction() {
-    echo 'I just ran a php function';
-  }
-
-  if (isset($_GET['settings'])) {
-    runMyFunction();
-  }
-
 ?>
 
 <div class="container-fluid d-flex align-items-center justify-content-center h-75">
+
     <div class="bg-secondary rounded-lg border border-dark w-75 h-75 d-flex align-items-center justify-content-center">
+
         <div class="container">
+
             <div class="row h-25 d-flex align-items-center justify-content-center">
 
 
@@ -36,8 +28,8 @@ function runMyFunction() {
                 ?>
             </div>
             <div class="row d-flex align-items-center justify-content-center">
-                <a class="profile-select d-flex align-items-center justify-content-center" href="user-select.php?settings=open">
-                settings
+                <a class="profile-select d-flex align-items-center justify-content-center" href="user-settings.php">
+                    settings
                 </a>
             </div>
         </div>
