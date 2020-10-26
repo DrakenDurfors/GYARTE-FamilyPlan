@@ -23,6 +23,10 @@ if (!isset($_SESSION['userID'])) {
                             <label class="custom-control-label" for="customSwitch1">Parent</label>
                         </div>
                     </div>
+                    <p>Confirm with Parent Key:</p>
+                    <div class="form-group justify-content-center d-flex">
+                        <input type="password" name="plock" placeholder="Parrent Key..." autocomplete="off">
+                    </div>
                     <div class="form-group justify-content-center d-flex">
                         <button type="submit" name="NP-submit">Create</button>
                     </div>

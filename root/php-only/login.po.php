@@ -35,6 +35,7 @@ if (isset($_POST['login-submit'])) {
                     session_start();
                     $_SESSION['userID'] = $row['userID'];
                     $_SESSION['username'] = $row['username'];
+                    $_SESSION['Ppwd'] = $row['parentPwd'];
                     header("Location: ../pages/index.php?login=success");
                     exit();
                 } else {

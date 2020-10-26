@@ -34,7 +34,7 @@ require "../includes/navbar.php";
         <!-- This is the basic html form for signup: -->
         <form action="../php-only/signup.po.php" method="post">
             <div class="form-group justify-content-center d-flex">
-                <input type="text" name="user" placeholder="Username..." autocomplete="off">
+                <input type="text" name="user" placeholder="Family name..." autocomplete="off">
             </div>
             <div class="form-group justify-content-center d-flex">
                 <input type="text" name="mail" placeholder="E-mail..." autocomplete="off">
@@ -44,6 +44,14 @@ require "../includes/navbar.php";
             </div>
             <div class="form-group justify-content-center d-flex">
                 <input type="password" name="pwdrep" placeholder="Repeat password..." autocomplete="off">
+            </div>
+            <hr>
+            <p>This password is for adding and changing users within the site:</p>
+            <div class="form-group justify-content-center d-flex">
+                <input type="password" name="parentpwd" placeholder="Parent password..." autocomplete="off">
+            </div>
+            <div class="form-group justify-content-center d-flex">
+                <input type="password" name="parentpwdrep" placeholder="Repeat password..." autocomplete="off">
             </div>
             <div class="form-group justify-content-center d-flex">
                 <button type="submit" name="signup-submit">Signup</button>

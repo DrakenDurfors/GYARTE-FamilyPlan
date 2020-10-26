@@ -2,7 +2,9 @@
 require "../includes/navbar.php";
 ?>
 
-<!-- vast emptyness -->
+<div class="container d-flex justify-content-center align-items-center h-75">
+<h1>Family Plan</h1>
+</div>
 
 
 

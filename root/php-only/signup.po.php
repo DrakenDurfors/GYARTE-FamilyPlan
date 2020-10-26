@@ -7,10 +7,12 @@ if (isset($_POST['signup-submit'])) {
     $email = $_POST['mail'];
     $password = $_POST['pwd'];
     $passwordRepeat = $_POST['pwdrep'];
+    $parentPwd = $_POST['parentpwd'];
+    $parentPwdRep = $_POST['parentpwdrep'];
 
     // These are all error-handlers that make sure the user does the correct thing.
     // checks if any of the form fields are empty, thats what the "empty()" does, checks if the thing is empty
-    if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) {
+    if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat) || empty($parentPwd) || empty($parentPwdRep)) {
         // These headers send you back to the signup form with an error/success message
         header("Location: ../pages/registrera.php?error=emptyfields&user=" . $username . "&mail=" . $email);
         exit();
@@ -24,6 +26,9 @@ if (isset($_POST['signup-submit'])) {
         header("Location: ../pages/registrera.php?error=invaliduser&mail =" . $email);
         exit();
     } else if ($password !== $passwordRepeat) {
+        header("Location: ../pages/registrera.php?error=passcheck&mail=" . $email . "&user=" . $username);
+        exit();
+    } else if($parentPwd != $parentPwdRep) {
         header("Location: ../pages/registrera.php?error=passcheck&mail=" . $email . "&user=" . $username);
         exit();
     } else {
@@ -48,7 +53,7 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             } else {
                 // And finally we put in the values into the database (saftly)
-                $sql = "INSERT INTO users (username, userEmail, userPwd) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO users (username, userEmail, userPwd, parentPwd) VALUES (?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     header("Location: ../pages/registrera.php?error=sqlerror");
@@ -56,7 +61,7 @@ if (isset($_POST['signup-submit'])) {
                 } else {
                     // This hashes the password before sending it into the database so that a hacker cant see all the passwords.
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
+                    mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedPwd, $parentPwd);
                     mysqli_stmt_execute($stmt);
                     header("Location: ../pages/registrera.php?signup=success");
                     exit();
