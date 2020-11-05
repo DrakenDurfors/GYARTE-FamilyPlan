@@ -21,8 +21,8 @@ if (!isset($_SESSION['userID'])) {
     </section>
 
     <section>
-        <div id="schedule">
-            <table id="scheduletable">
+        <div id="schedule" class="border border-dark">
+            <table id="scheduletable" class="border border-dark">
                 <THead>
                     <tr>
                         <th>
@@ -31,18 +31,35 @@ if (!isset($_SESSION['userID'])) {
                     </tr>
                 </THead>
 
-                <TBody id="scheduleBody">
+                <TBody id="scheduleBody" class="border border-dark">
                     <?php
                     require "../php-only/dbh.po.php";
 
                     $sql = "SELECT TIMESTAMPDIFF(MINUTE, eStart, eEnd) AS minutes, eID, eTitle, eStart, eEnd FROM events WHERE uID = $_SESSION[userID] ORDER BY eStart ASC";
                     $result = mysqli_query($conn, $sql);
+                    $lastDate = strtotime("00:00:00");
+
                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                        echo ('<td rowspan="' . $row[0] . '" colspan="1" style="border:2px solid black; border-radius: 5px ;" align="center" nowrap="nowrap">' . $row[2] . '<br>' . $row[3] . '-' . $row[4] .  '</td>');
+                        $time = strtotime($row[3]);
+                        $since = $time - $lastDate;
+                        $since = round($since / 300);
+                        for ($i = $since; $i > 0; $i--) {
+                            echo ('<tr> </tr>');
+                        }
+
+                        $row[0] = round($row[0] / 5);
+                        echo ('<td rowspan="' . $row[0] . '" colspan="1" style="border:2px solid black; border-radius: 5px ;" align="center" nowrap="nowrap">' . $row[2] . '<br>' . date('H:i', strtotime($row[3])) . '-' . date('H:i', strtotime($row[4])) .  '</td>');
                         for ($i = $row[0] - 1; $i > 0; $i--) {
                             echo ('<tr> </tr>');
                         }
+                        $lastDate = strtotime($row[4]);
                     }
+                    $time = strtotime('24:00:00');
+                        $since = $time - $lastDate;
+                        $since = round($since / 300);
+                        for ($i = $since; $i > 0; $i--) {
+                            echo ('<tr> </tr>');
+                        }
 
                     ?>
                     <!-- 
