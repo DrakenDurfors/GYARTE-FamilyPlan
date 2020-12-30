@@ -6,8 +6,8 @@ if (isset($_POST['scEvAdd-submit'])) {
     $eventD = $_POST['eventDate'];
     $startT = $_POST['eventStart'];
     $endT = $_POST['eventEnd'];
-    $title = $_POST['title'];
-    $descrip = $_POST['content'];
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $descrip = mysqli_real_escape_string($conn, $_POST['content']);
 
     if (empty($eventD) || empty($startT) || empty($endT) || empty($title) || empty($descrip)) {
         // These headers send you back to the signup form with an error/success message

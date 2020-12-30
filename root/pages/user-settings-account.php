@@ -11,7 +11,7 @@ require "../php-only/dbh.po.php";
 
 <div class="container-fluid d-flex align-items-center justify-content-center h-75">
 
-    <div class="bg-secondary rounded-lg border border-dark w-25 h-75 d-flex align-items-center justify-content-center">
+    <div class="bg-secondary rounded-lg border border-dark w-25 d-flex align-items-center justify-content-center">
 
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">

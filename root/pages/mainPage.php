@@ -1,40 +1,19 @@
 <?php
 require "../includes/navbar.php";
 require "../php-only/dbh.po.php";
+
+$sql = 'SELECT userID from people WHERE personID=' . $_GET["uId"] . ' LIMIT 1';
+$query = mysqli_query($conn, $sql);
+
 // Makes sure the user is in fact logged in
-if (!isset($_SESSION['userID'])) {
+if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($query)[0]) {
     header("Location: ../pages/index.php");
     exit();
 }
 ?>
+
 <main id="body" class="container-fluid d-flex justify-content-around h-75">
-    <section>
-        <div id="scheduleInput">
-            <form action="../php-only/scEvAdd.po.php" method="post">
-            <input type="hidden" name="pID" value="<?php echo $_GET['uId']; ?>">
-                <select class="custom-select" name="eventDate" id="eventDate">
-                    <option selected>Select day</option>
-                    <option value="1">Monday</option>
-                    <option value="2">Tuesday</option>
-                    <option value="3">Wednesday</option>
-                    <option value="4">Thursday</option>
-                    <option value="5">Friday</option>
-                    <option value="6">Saturday</option>
-                    <option value="7">Sunday</option>
-                </select>  <br>
-                <label for="eventStart">Starttime</label> <br>
-                <input type="time" name="eventStart" id="eventStart"> <br>
-                <label for="eventEnd">Endtime</label> <br>
-                <input type="time" name="eventEnd" id="eventEnd"> <br>
-                <label for="title">Title</label> <br>
-                <input type="text" name="title" id="title"> <br>
-                <label for="content">Description</label> <br>
-                <textarea name="content" id="content" cols="30" rows="10"></textarea>
-                 <br>
-                <input type="submit" value="Submit" name="scEvAdd-submit">
-            </form>
-        </div>
-    </section>
+
     <section>
         <table id="schedule">
             <tr>
@@ -50,7 +29,16 @@ if (!isset($_SESSION['userID'])) {
         </table>
     </section>
 
+    <section>
+        <div class="mainRightConsole">
+            <div class="shorelist">
 
+            </div>
+            <div class="console">
+                <p id="console_addEvBtn">+ Add Event</p>
+            </div>
+        </div>
+    </section>
     <script>
         var table = document.getElementById("schedule");
         for (i = 0; i <= 144; i++) {
@@ -154,15 +142,33 @@ if (!isset($_SESSION['userID'])) {
         ?>
     </script>
 
-    </TBody>
-
-    </table>
-
-    </div>
-    </section>
-
 </main>
-
+<section class="schedlueForm" id="scheduleInput">
+    <div>
+        <span class="close">X</span>
+        <form action="../php-only/scEvAdd.po.php" method="post">
+            <input type="hidden" name="pID" value="<?php echo $_GET['uId']; ?>">
+            <select class="custom-select" name="eventDate" id="eventDate">
+                <option selected value="">Select day</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+            </select> <br> <br>
+            <input type="time" name="eventStart" id="eventStart"> 
+            <label for="eventStart">Starttime</label> <br>
+            <input type="time" name="eventEnd" id="eventEnd">
+            <label for="eventEnd">Endtime</label> <br> <br>
+            <input type="text" name="title" id="title" placeholder="Title..."> <br> <br>
+            <textarea name="content" id="content" cols="30" rows="10" placeholder="Description..."></textarea>
+            <br>
+            <input type="submit" value="Submit" name="scEvAdd-submit">
+        </form>
+    </div>
+</section>
 
 
 <?php
