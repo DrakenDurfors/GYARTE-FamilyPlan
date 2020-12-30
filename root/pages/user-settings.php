@@ -17,6 +17,9 @@ if (!isset($_SESSION['userID'])) {
                 <a href="user-settings-change-path.php" class="profile-select d-flex align-items-center justify-content-center">
                     Edit Users
                 </a>
+                <a href="user-settings-account.php" class="profile-select d-flex align-items-center justify-content-center">
+                    Account settings
+                </a>
             </div>
         </div>
 

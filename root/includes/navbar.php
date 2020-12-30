@@ -29,6 +29,7 @@ session_start();
             // If the user is logged in then the calendar item will be displayed
             if (isset($_SESSION['userID'])) {
                 echo '<li class="navListItem"><a href="user-select.php">Calendar</a></li>';
+                echo '<li class="navListItem"><a href="user-settings.php">Settings</a></li>';
             }
             ?>
         </ul>
