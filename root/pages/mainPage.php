@@ -32,6 +32,9 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
     <section>
         <div class="mainRightConsole">
             <div class="shorelist">
+            <ul>
+            <li>hi</li>
+            </ul>
 
             </div>
             <div class="console">
@@ -65,7 +68,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             var duration = Math.round(parseInt(eventArray[0]) / 10)
             var event = document.createElement("td")
 
-            var title = document.createElement("h2")
+            var title = document.createElement("h5")
             title.innerText = eventArray[2]
             var timeDisplay = document.createElement("p")
             timeDisplay.innerText = (eventArray[3].substring(0, eventArray[3].length - 3) + " - " + eventArray[4].substring(0, eventArray[4].length - 3))
@@ -82,11 +85,30 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             modalTitle.innerText = eventArray[2]
             var modalText = document.createElement("p")
             modalText.innerText = eventArray[5]
+            var deleteForm = document.createElement("form")
+            deleteForm.method = "POST"
+            deleteForm.action = "../php-only/scEvDis.po.php"
+            var deleteBtn = document.createElement("input")
+            deleteBtn.value = "Delete"
+            deleteBtn.type = "submit"
+            deleteBtn.name = "delConfirm"
+            var delInfo1 = document.createElement("input")
+            delInfo1.type = "hidden"
+            delInfo1.name = "delID"
+            delInfo1.value = eventArray[1]
+            var delInfo2 = document.createElement("input")
+            delInfo2.type = "hidden"
+            delInfo2.name = "id"
+            delInfo2.value = "<?php echo $_GET['uId'];?>"
+            deleteForm.appendChild(delInfo1)
+            deleteForm.appendChild(delInfo2)
+            deleteForm.appendChild(deleteBtn)
 
             modalContent.appendChild(close)
             modalContent.appendChild(modalTitle)
             modalContent.innerHTML += "<hr>"
             modalContent.appendChild(modalText)
+            modalContent.appendChild(deleteForm)
             modal.appendChild(modalContent)
 
             event.onclick = function() {

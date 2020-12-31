@@ -219,3 +219,7 @@ tr {
     background-color: rgb(252, 252, 252);
     padding: 1rem;
 }
+
+.mainRightConsole{
+    margin-top: 2rem;
+}
