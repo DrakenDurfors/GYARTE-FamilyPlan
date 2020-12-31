@@ -32,9 +32,9 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
     <section>
         <div class="mainRightConsole">
             <div class="shorelist">
-            <ul>
-            <li>hi</li>
-            </ul>
+                <ul>
+
+                </ul>
 
             </div>
             <div class="console">
@@ -99,7 +99,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             var delInfo2 = document.createElement("input")
             delInfo2.type = "hidden"
             delInfo2.name = "id"
-            delInfo2.value = "<?php echo $_GET['uId'];?>"
+            delInfo2.value = "<?php echo $_GET['uId']; ?>"
             deleteForm.appendChild(delInfo1)
             deleteForm.appendChild(delInfo2)
             deleteForm.appendChild(deleteBtn)
@@ -180,7 +180,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                 <option value="6">Saturday</option>
                 <option value="7">Sunday</option>
             </select> <br> <br>
-            <input type="time" name="eventStart" id="eventStart"> 
+            <input type="time" name="eventStart" id="eventStart">
             <label for="eventStart">Starttime</label> <br>
             <input type="time" name="eventEnd" id="eventEnd">
             <label for="eventEnd">Endtime</label> <br> <br>
