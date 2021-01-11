@@ -5,7 +5,7 @@ require "../php-only/dbh.po.php";
 $sql = 'SELECT userID from people WHERE personID=' . $_GET["uId"] . ' LIMIT 1';
 $query = mysqli_query($conn, $sql);
 
-// Makes sure the user is in fact logged in
+// Makes sure the user is in fact logged in and does not attempt to acces other accounts
 if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($query)[0]) {
     header("Location: ../pages/index.php");
     exit();
@@ -38,7 +38,74 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
 
             </div>
             <div class="console">
-                <p id="console_addEvBtn">+ Add Event</p>
+                <p id="console_addEvBtn" class="pointer">+ Add Event</p>
+                <?php
+                $sql = 'SELECT userID, status FROM people WHERE personID = ' . $_GET["uId"] . ' LIMIT 1';
+                $query = mysqli_query($conn, $sql);
+                $result = mysqli_fetch_assoc($query);
+
+                if ($result['status'] == 'adult') {
+                ?>
+                    <p id="console_addTaBtn" class="pointer">+ Add Task</p>
+
+                    <h1>Child events:</h1>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Time</th>
+                            <th>Event</th>
+                        </tr>
+                        <?php
+                        $sql_PID = 'SELECT personID, pName, status FROM people WHERE userID = ' . $result["userID"] . '';
+                        $query_PID = mysqli_query($conn, $sql_PID);
+                        while ($result_PID = mysqli_fetch_assoc($query_PID)) {
+                            if ($result_PID['status'] == "child") {
+
+
+                                $sql_PEV = 'SELECT * FROM events WHERE parentview = 1 AND pID = ' . $result_PID["personID"] . '';
+                                $query_PEV = mysqli_query($conn, $sql_PEV);
+                                while ($result_PEV = mysqli_fetch_assoc($query_PEV)) {
+                                    echo '
+                                <tr>
+                                    <td>' . $result_PID["pName"] . '</td>
+                                    <td>' . substr($result_PEV['eStart'], 0, -3) . ' - ' . substr($result_PEV['eEnd'], 0, -3) . '</td>
+                                    <td>' . $result_PEV['eTitle'] . '</td>
+                                </tr>
+                                
+                                ';
+                                }
+                            }
+                        }
+                        ?>
+                    </table>
+
+                <?php
+                } else {
+                ?>
+                    <h1>Your tasks: </h1>
+                    <Table>
+                        <tr>
+                            <th>Task Name</th>
+                            <th>Task Desription</th>
+                        </tr>
+
+                        <?php
+                        $sql_PTA = 'SELECT tName, tDes FROM tasks WHERE pID = ' . $_GET["uId"] . '';
+                        $query_PTA = mysqli_query($conn, $sql_PTA);
+                        while ($result_PTA = mysqli_fetch_array($query_PTA)) {
+                            echo '
+                            <tr>
+                                <td>' . $result_PTA[0] . '</td>
+                                <td>' . $result_PTA[1] . '</td>
+                            </tr>
+                            ';
+                        }
+                        ?>
+                    </Table>
+                <?php
+                }
+
+                ?>
             </div>
         </div>
     </section>
@@ -67,6 +134,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             var start = document.getElementById((parseInt(startD) - parseInt(startAll)) / 600)
             var duration = Math.round(parseInt(eventArray[0]) / 10)
             var event = document.createElement("td")
+            event.classList.add("pointer")
 
             var title = document.createElement("h5")
             title.innerText = eventArray[2]
@@ -183,11 +251,41 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             <input type="time" name="eventStart" id="eventStart">
             <label for="eventStart">Starttime</label> <br>
             <input type="time" name="eventEnd" id="eventEnd">
-            <label for="eventEnd">Endtime</label> <br> <br>
+            <label for="eventEnd">Endtime</label> <br>
+            <input type="radio" name="parentView" id="parentView">
+            <label for="parentview">Send to parents</label> <br>
+            <br>
             <input type="text" name="title" id="title" placeholder="Title..."> <br> <br>
             <textarea name="content" id="content" cols="30" rows="10" placeholder="Description..."></textarea>
             <br>
             <input type="submit" value="Submit" name="scEvAdd-submit">
+        </form>
+    </div>
+</section>
+
+<!-- --------------------- -->
+
+<section class="schedlueForm" id="taskInput">
+    <div>
+        <span class="close">X</span>
+        <form action="../php-only/taskAdd.po.php" method="post"><br> <br>
+            <input type="text" name="Tname" placeholder="Task name..."><br> <br>
+            <input type="text" name="Tdes" placeholder="Task description..."> <br> <br>
+            <select name="Tchild" id="">
+                <option value="" disabled>-- Select Child --</option>
+                <?php
+                $sql = 'SELECT pName, personID FROM people WHERE status = "child" AND userID = ' . $_SESSION['userID'] . '';
+                $query = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_array($query)) {
+                    echo '
+                    <option value="' . $row[1] . '">' . $row[0] . '</option>
+                    ';
+                }
+                ?>
+            </select> <br> <br>
+            <input type="hidden" name="pID" value="<?php echo $_GET['uId']; ?>">
+            <input type="submit" value="Assign Task" name="taSubmit">
+
         </form>
     </div>
 </section>
