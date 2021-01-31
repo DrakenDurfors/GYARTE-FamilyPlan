@@ -7,13 +7,13 @@ if (!isset($_SESSION['userID'])) {
 }
 ?>
 
-<div class="container-fluid d-flex align-items-center justify-content-center h-75">
+<div class="mainContainer">
 
-    <div class="bg-secondary rounded-lg border border-dark w-75  d-flex align-items-center justify-content-center">
+    <div class="userSelectWraper">
 
-        <div class="container">
+        <div>
 
-            <div class="row h-25 d-flex align-items-center justify-content-center">
+            <div class="userSelectDisplay">
 
 
                 <?php
@@ -21,20 +21,20 @@ if (!isset($_SESSION['userID'])) {
 
                 $sql = "SELECT * FROM people WHERE userID = $_SESSION[userID]";
                 $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) == 0) {
+                    header("Location: ../pages/user-settings.php");
+                    exit();
+                }
                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                     if ($row[4] == "adult") {
-                        echo ("<a href='../pages/mainPage.php?uId=$row[1]' class='profile-select d-flex align-items-center justify-content-center'> $row[2] </a>");
-                    } else if($row[4] == "child"){
-                        echo ("<a href='../pages/mainPage.php?uId=$row[1]' class='profile-select d-flex align-items-center justify-content-center text-success'> $row[2] </a>");
+                        echo ("<a href='../pages/mainPage.php?uId=$row[1]' class='profile-select profile-select1'> $row[2] </a>");
+                    } else if ($row[4] == "child") {
+                        echo ("<a href='../pages/mainPage.php?uId=$row[1]' class='profile-select profile-select2'> $row[2] </a>");
                     }
                 }
 
+
                 ?>
-            </div>
-            <div class="row d-flex align-items-center justify-content-center">
-                <a class="profile-select d-flex align-items-center justify-content-center" href="user-settings.php">
-                    settings
-                </a>
             </div>
         </div>
     </div>

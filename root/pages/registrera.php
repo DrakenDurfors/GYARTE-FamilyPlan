@@ -1,8 +1,8 @@
 <?php
 require "../includes/navbar.php";
 ?>
-<main class="container-fluid d-flex align-items-center justify-content-center h-75">
-    <section class="rounded border border-dark p-5">
+<main class="mainContainer">
+    <section class="registerSection">
         <h1 class="text-center">Signup</h1>
         <p>
             <?php
@@ -33,27 +33,27 @@ require "../includes/navbar.php";
         </p>
         <!-- This is the basic html form for signup: -->
         <form action="../php-only/signup.po.php" method="post">
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <input type="text" name="user" placeholder="Family name..." autocomplete="off">
             </div>
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <input type="text" name="mail" placeholder="E-mail..." autocomplete="off">
             </div>
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <input type="password" name="pwd" placeholder="Password..." autocomplete="off">
             </div>
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <input type="password" name="pwdrep" placeholder="Repeat password..." autocomplete="off">
             </div>
             <hr>
             <p>This password is for adding and changing users within the site:</p>
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <input type="password" name="parentpwd" placeholder="Parent password..." autocomplete="off">
             </div>
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <input type="password" name="parentpwdrep" placeholder="Repeat password..." autocomplete="off">
             </div>
-            <div class="form-group justify-content-center d-flex">
+            <div class="form-group">
                 <button type="submit" name="signup-submit">Signup</button>
             </div>
 

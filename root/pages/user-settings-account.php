@@ -9,12 +9,12 @@ require "../php-only/dbh.po.php";
 
 ?>
 
-<div class="container-fluid d-flex align-items-center justify-content-center h-75">
+<div class="firstPage">
 
-    <div class="bg-secondary rounded-lg border border-dark w-25 d-flex align-items-center justify-content-center">
+    <div class="userSelectWraper">
 
         <div class="container">
-            <div class="row d-flex align-items-center justify-content-center">
+            
                 <section class="accountSettings">
                     <?php
                     // This will get the user name and email and then display them
@@ -37,90 +37,97 @@ require "../php-only/dbh.po.php";
                     } else if ($_GET['s'] == 'u') {
                         // This is the form for changeing the username
                         echo '<form action="../php-only/account-change.po.php" method="POST">
-            <div class="form-group">
-                <label for="username">Change Username:</label> 
+            <div class="form-group2">
+                <label for="username">Change Username:</label> <br>
                 <input type="text" class="form-control" name="username" id="username" value="' . $row["username"] . '" required autocomplete="off">
             </div> <br>
-            <div class="form-group">
-                <label for="username">Confirm With Password:</label> 
+            <div class="form-group2">
+                <label for="username">Confirm With Password:</label> <br>
                 <input type="password" class="form-control" name="passconf" id="passconf" required>
             </div> <br>
+            <div class="form-group2">
             <input type="submit" value="Confirm Change" name="CUSub" class="articleChangeBtn edit ">
+            </div>
         </form> <br>
             <a href="user-settings-account.php">Back</a>
             ';
                     } else if ($_GET['s'] == 'm') {
                         // This is the code for changeing the email of the user
                         echo '<form action="../php-only/account-change.po.php" method="POST">
-            <div class="form-group">
-                <label for="mail">Change E-mail:</label> 
+            <div class="form-group2">
+                <label for="mail">Change E-mail:</label>  <br>
                 <input type="text" class="form-control" name="mail" id="mail" value="' . $row["userEmail"] . '" required autocomplete="off">
             </div> <br>
-            <div class="form-group">
-                <label for="username">Confirm With Password:</label> 
+            <div class="form-group2">
+                <label for="username">Confirm With Password:</label>  <br>
                 <input type="password" class="form-control" name="passconf" id="passconf" required>
             </div> <br>
+            <div class="form-group2">
             <input type="submit" value="Confirm Change" name="CMSub" class="articleChangeBtn edit ">
+            </div>
             </form> <br>
             <a href="user-settings-account.php">Back</a>
             ';
                     } else if ($_GET['s'] == 'p') {
                         // This is the form for changeing the password
                         echo '<form action="../php-only/account-change.po.php" method="POST">
-            <div class="form-group">
-                <label for="passconf">Old Password:</label> 
+            <div class="form-group2">
+                <label for="passconf">Old Password:</label>  <br>
                 <input type="password" class="form-control" name="passconf" id="passconf" required>
             </div> <br>
-            <div class="form-group">
-                <label for="pass1">New Password:</label> 
+            <div class="form-group2">
+                <label for="pass1">New Password:</label>  <br>
                 <input type="password" class="form-control" name="pass1" id="pass1" required autocomplete="off">
             </div> <br>
-            <div class="form-group">
-                <label for="pass2">Confirm New Password:</label> 
+            <div class="form-group2">
+                <label for="pass2">Confirm New Password:</label>  <br>
                 <input type="password" class="form-control" name="pass2" id="pass2" required autocomplete="off">
             </div> <br>
+            <div class="form-group2">
             <input type="submit" value="Confirm Change" name="CPSub" class="articleChangeBtn edit ">
-
+            </div>
         </form>
             <a href="user-settings-account.php">Back</a>
             ';
                     } else if ($_GET['s'] == 'pp') {
                         // This is the form for changeing the parent password
                         echo '<form action="../php-only/account-change.po.php" method="POST">
-            <div class="form-group">
-                <label for="passconf">Old Parent Password:</label> 
+            <div class="form-group2">
+                <label for="passconf">Old Parent Password:</label>  <br>
                 <input type="password" class="form-control" name="Ppassconf" id="passconf" required>
             </div> <br>
-            <div class="form-group">
-                <label for="pass1">New Parent Password:</label> 
+            <div class="form-group2">
+                <label for="pass1">New Parent Password:</label>  <br>
                 <input type="password" class="form-control" name="pass1" id="pass1" required autocomplete="off">
             </div> <br>
-            <div class="form-group">
-                <label for="pass2">Confirm New Parent Password:</label> 
+            <div class="form-group2">
+                <label for="pass2">Confirm New Parent Password:</label>  <br>
                 <input type="password" class="form-control" name="pass2" id="pass2" required autocomplete="off">
             </div> <br>
-            <div class="form-group">
-                <label for="pass2">Confirm with Password:</label> 
+            <div class="form-group2">
+                <label for="pass2">Confirm with Password:</label>  <br>
                 <input type="password" class="form-control" name="passconf" id="pass3" required autocomplete="off">
             </div> <br>
+            <div class="form-group2">
             <input type="submit" value="Confirm Change" name="CPPSub" class="articleChangeBtn edit ">
-
+            </div>
         </form>
             <a href="user-settings-account.php">Back</a>
             ';
                     } else if ($_GET['s'] == 'd') {
                         // This is the form for deleting the account
                         echo '<form action="../php-only/account-change.po.php" method="POST">
-            <div class="form-group">
-                <label for="passconf">Enter Password:</label> 
+            <div class="form-group2">
+                <label for="passconf">Enter Password:</label>  <br>
                 <input type="password" class="form-control" name="passconf" id="passconf" required>
             </div> <br>
-            <div class="form-group">
+            <div class="form-group2">
                 <input type="radio" name="check" id="check" required>
                 <label for="check">Are you sure?</label> 
                 </div> <br>
+                <div class="form-group2">
             <input type="submit" value="Confirm Delete" name="CDSub" class="articleChangeBtn delete ">
-
+                </div>
         </form> <br>
             <a href="user-settings-account.php">Back</a>
             ';

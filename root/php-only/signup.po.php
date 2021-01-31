@@ -38,7 +38,7 @@ if (isset($_POST['signup-submit'])) {
         $stmt = mysqli_stmt_init($conn);
         // checks if the sql was succesfully sent.
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../pages/registrera.php?error=sqlerror");
+            header("Location: ../pages/registrera.php?error=sqlerror1");
             exit();
         } else {
             // As you can see on line 37 the username isnt added immedietly due to safty concerns. the code below sends the $username into the code.
@@ -56,7 +56,7 @@ if (isset($_POST['signup-submit'])) {
                 $sql = "INSERT INTO users (username, userEmail, userPwd, parentPwd) VALUES (?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    header("Location: ../pages/registrera.php?error=sqlerror");
+                    header("Location: ../pages/registrera.php?error=sqlerror2");
                     exit();
                 } else {
                     // This hashes the password before sending it into the database so that a hacker cant see all the passwords.

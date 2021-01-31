@@ -2,7 +2,7 @@
 require "../includes/navbar.php";
 ?>
 
-<div class="container d-flex justify-content-center align-items-center h-75">
+<div class="firstPage">
 <h1>Family Plan</h1>
 </div>
 

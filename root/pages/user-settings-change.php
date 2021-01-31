@@ -7,35 +7,35 @@ if (!isset($_SESSION['userID'])) {
 }
 ?>
 
-<div class="container-fluid d-flex align-items-center justify-content-center h-75">
+<div class="firstPage">
 
-    <div class="bg-secondary rounded-lg border border-dark w-25 h-75 d-flex align-items-center justify-content-center">
+    <div class="userSelectWraper">
 
         <div class="container">
-            <div class="row d-flex align-items-center justify-content-center">
-                <h1>CHANGE!</h1>
-                <?php
-                echo ("<form action='../php-only/CP.po.php?user=$_GET[user]' method='post'>");
 
-                require "../php-only/dbh.po.php";
+            <h1 class="text-center">CHANGE!</h1>
+            <?php
+            echo ("<form action='../php-only/CP.po.php?user=$_GET[user]' method='post'>");
 
-                $sql = "SELECT pName, status FROM people WHERE personID = $_GET[user]";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                    echo ('<div class="form-group justify-content-center d-flex">
+            require "../php-only/dbh.po.php";
+
+            $sql = "SELECT pName, status FROM people WHERE personID = $_GET[user]";
+            $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                echo ('<div class="form-group justify-content-center d-flex">
                     <input type="text" name="pName" value=' . $row[0] . ' autocomplete="off">
                 </div>
                 <div class="form-group justify-content-center d-flex">
                     <div class="custom-control custom-switch">
                     ');
-                    if ($row[1] == "adult") {
-                        echo ('
+                if ($row[1] == "adult") {
+                    echo ('
                         <input type="checkbox" class="custom-control-input" id="customSwitch1" name="status" checked>
                         ');
-                    } else {
-                        echo ('<input type="checkbox" class="custom-control-input" id="customSwitch1" name="status">');
-                    }
-                    echo ('
+                } else {
+                    echo ('<input type="checkbox" class="custom-control-input" id="customSwitch1" name="status">');
+                }
+                echo ('
                         <label class="custom-control-label" for="customSwitch1">Parent</label>
                     </div>
                 </div>
@@ -44,22 +44,18 @@ if (!isset($_SESSION['userID'])) {
                     <input type="password" name="plock" placeholder="Parrent Key..." autocomplete="off">
                 </div>
                 <div class="form-group justify-content-center d-flex">
-                    <button type="submit" name="CP-submit">Create</button>
+                    <button type="submit" name="CP-submit">Confirm</button>
                 </div>
                     <hr>
                 <div class="form-group justify-content-center d-flex">
-                <button type="submit" name="CP-delete" class="bg-danger">DELETE</button>
-            </div>'
-            
-            
-            );
-                }
+                <button type="submit" name="CP-delete" class="delete">DELETE</button>
+            </div>');
+            }
 
-                ?>
+            ?>
 
 
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 </div>

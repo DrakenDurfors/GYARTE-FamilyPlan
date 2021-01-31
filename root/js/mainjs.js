@@ -3,35 +3,40 @@
 var scInput = document.getElementById("scheduleInput");
 var c_addEvBtn = document.getElementById("console_addEvBtn");
 
-c_addEvBtn.addEventListener("click", function(){
-    scInput.style.display = "flex"
-})
-
-scInput.addEventListener("click", function(x) {
+if (c_addEvBtn != null) {
+    c_addEvBtn.addEventListener("click", function () {
+        scInput.style.display = "flex";
+    })
+}
+if(scInput != null){
+scInput.addEventListener("click", function (x) {
     if (x.target.nodeName == "SPAN") {
         scInput.style.display = "none"
     } else if (x.target == scInput) {
         scInput.style.display = "none"
     }
 })
+}
 
 
 // Task input script
 
 var taInput = document.getElementById("taskInput");
 var c_addTaBtn = document.getElementById("console_addTaBtn");
-
-c_addTaBtn.addEventListener("click", function(){
+if(c_addTaBtn != null){
+c_addTaBtn.addEventListener("click", function () {
     taInput.style.display = "flex"
 })
-
-taInput.addEventListener("click", function(x) {
+}
+if(taInput != null){
+taInput.addEventListener("click", function (x) {
     if (x.target.nodeName == "SPAN") {
         taInput.style.display = "none"
     } else if (x.target == taInput) {
         taInput.style.display = "none"
     }
 })
+}
 
 
 // Schedule script --------

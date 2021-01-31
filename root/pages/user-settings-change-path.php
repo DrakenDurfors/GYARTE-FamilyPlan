@@ -6,15 +6,13 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 ?>
-            <h1 class="d-flex align-item-center justify-content-center w-100">CHANGE!</h1>
 
-<div class="container-fluid d-flex align-items-center justify-content-center h-75">
+<div class="firstPage">
+    <div class="userSelectWraper">
+        <div>
+            <h1>CHANGE!</h1>
 
-    <div class="bg-secondary rounded-lg border border-dark w-25 h-75 d-flex justify-content-center">
-
-        <div class="container">
-            <div class="row h-100 d-flex p-5">
-                <ul>
+            <ul class="settings-change">
                 <?php
                 require "../php-only/dbh.po.php";
 
@@ -25,8 +23,7 @@ if (!isset($_SESSION['userID'])) {
                 }
 
                 ?>
-                </ul>
-            </div>
+            </ul>
         </div>
     </div>
 </div>
