@@ -44,7 +44,8 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75%;
+    height: auto;
+    min-height: 75%;
 }
 
 .mainPage{
