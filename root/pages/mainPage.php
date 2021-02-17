@@ -15,7 +15,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
 <main id="body" class="firstPage mainPage">
 
     <section>
-    <!-- The schedule table -->
+        <!-- The schedule table -->
         <table id="schedule">
             <tr>
                 <th class="thDay">Tid</th>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                 <?php
                 } else {
                 ?>
-                <!-- If the user is a child it will display the tasks given by the parents -->
+                    <!-- If the user is a child it will display the tasks given by the parents -->
                     <h1>Your tasks: </h1>
                     <Table class="eventTable">
                         <tr>
@@ -99,7 +99,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                                 <td>' . $result_PTA[1] . '</td>
                                 <td> <form action="../php-only/tDel.po.php" method="post">
                                 <input type="hidden" name="tID" value="' . $result_PTA[2] . '">
-                                <input type="hidden" name="pID" value="'. $_GET["uId"] .'">
+                                <input type="hidden" name="pID" value="' . $_GET["uId"] . '">
                                 <input type="submit" value="&#10003;" name="tSubmit">
                                 </form> </td>
                             </tr>
@@ -107,34 +107,35 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                         }
                         ?>
                     </Table>
-                    
+
                 <?php
                 }
 
                 ?>
-                
+
             </div>
         </div>
     </section>
     <script>
-    // gets the schedule-table
+        // gets the schedule-table
         var table = document.getElementById("schedule");
         // this will create 144 rows for the table
-        for (i = 0; i <= 144; i++) {
+        for (i = 0; i <= 288; i++) {
             // creates a row and a data element
             var x = document.createElement("tr");
             var y = document.createElement("td");
             // if the row number is perfectly diviseble by 6 it will put a data element with the time in it
-            if (i % 6 == 0) {
-                // if the hour is before than 10 (only have a single digit) it will add a 0 before the digit.
-                if (i / 6 >= 10) {
-                    y.innerText = (i / 6) + ":00";
+            if (i % 12 == 0 && (i / 12) != 24) {
+                // if the hour is earlier than 10 (only have a single digit) it will add a 0 before the digit.
+                if (i / 12 >= 10) {
+                    y.innerText = (i / 12) + ":00";
                 } else {
-                    y.innerText = "0" + (i / 6) + ":00";
+
+                    y.innerText = "0" + (i / 12) + ":00";
                 }
                 // puts in the data element inside the row
                 y.classList.add("tdTime");
-                y.rowSpan = "6";
+                y.rowSpan = "12";
                 x.appendChild(y);
             }
             // gives the row an id and inputs it into the table
@@ -149,9 +150,9 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             // Sets the start of the day
             var startAll = Math.round(new Date("2000/10/10 00:00:00").getTime() / 1000)
             // Sets the start of the event relative to the start of the day
-            var start = document.getElementById((parseInt(startD) - parseInt(startAll)) / 600)
+            var start = document.getElementById((parseInt(startD) - parseInt(startAll)) / 300)
             // Sets the duration of the event
-            var duration = Math.round(parseInt(eventArray[0]) / 10)
+            var duration = Math.round(parseInt(eventArray[0]) / 5)
             // Creates the event in the form of a data element
             var event = document.createElement("td")
             // Gives the event the pointer-class making the cursor change on hover
@@ -267,8 +268,8 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                 // Assigns all the timing values
                 $time = strtotime($row[3]);
                 $since = $time - $lastDate;
-                $since = round($since / 600);
-                $timestart = round(($lastDate - strtotime("00:00:00")) / 600);
+                $since = round($since / 300);
+                $timestart = round(($lastDate - strtotime("00:00:00")) / 300);
                 // Echoes the js functions into the script-tag with the array values
                 echo "addSpace($timestart, $since);
                 addEvent(" . json_encode($row) . ");";
@@ -278,8 +279,8 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
             // This inserts the final empty-space of the day
             $time = strtotime("24:00:00");
             $since = $time - $lastDate;
-            $since = round($since / 600);
-            $timestart = round(($lastDate - strtotime("00:00:00")) / 600);
+            $since = round($since / 300);
+            $timestart = round(($lastDate - strtotime("00:00:00")) / 300);
             echo "addSpace($timestart, $since);";
         }
 
@@ -306,11 +307,11 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                 </select>
             </div>
             <div class="form-group2">
-                <input type="time" name="eventStart" id="eventStart">
+                <input type="time" name="eventStart" id="eventStart" step="300">
                 <label for="eventStart">Starttime</label>
             </div>
             <div class="form-group2">
-                <input type="time" name="eventEnd" id="eventEnd">
+                <input type="time" name="eventEnd" id="eventEnd" step="300">
                 <label for="eventEnd">Endtime</label>
             </div>
             <div class="form-group2">
