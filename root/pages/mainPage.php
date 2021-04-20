@@ -48,6 +48,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                     <table class="eventTable">
                         <tr>
                             <th>Name</th>
+                            <th>Day</th>
                             <th>Time</th>
                             <th>Event</th>
                         </tr>
@@ -62,9 +63,36 @@ if (!isset($_SESSION['userID']) || $_SESSION['userID'] != mysqli_fetch_array($qu
                                 $query_PEV = mysqli_query($conn, $sql_PEV);
                                 while ($result_PEV = mysqli_fetch_assoc($query_PEV)) {
                                     // Displays the event
+                                    $eDay =  $result_PEV["eDate"];
+                                    switch($eDay){
+                                        case 1:
+                                            $eDayName = "Monday";
+                                        break;
+                                        case 2:
+                                            $eDayName = "Tuesday";
+                                        break;
+                                        case 3:
+                                            $eDayName = "Wednesday";
+                                        break;
+                                        case 4:
+                                            $eDayName = "Thursday";
+                                        break;
+                                        case 5:
+                                            $eDayName = "Friday";
+                                        break;
+                                        case 6:
+                                            $eDayName = "Saturday";
+                                        break;
+                                        case 7:
+                                            $eDayName = "Sunday";
+                                        break;
+                                        default:
+                                    break;
+                                    }
                                     echo '
                                 <tr>
                                     <td>' . $result_PID["pName"] . '</td>
+                                    <td>' . $eDayName . '</td>
                                     <td>' . substr($result_PEV['eStart'], 0, -3) . ' - ' . substr($result_PEV['eEnd'], 0, -3) . '</td>
                                     <td>' . $result_PEV['eTitle'] . '</td>
                                 </tr>
